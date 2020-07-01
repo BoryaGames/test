@@ -1,19 +1,310 @@
-<html>
+
+<!doctype html>
+<html lang="en" style="height: 100%;">
 <head>
-<style>
-</style>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript">
-</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="Useful bots and services for discord. Including discord backups and rich embed generation.">
+<meta name="keywords" content="xenon bot,discord backups,embed generator,embed visualizer,discord embed visualizer,discord embeds,discord rich embeds,embed in discord,discord bots">
+<meta name="author" content="Merlin Fuchs">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Magic Bots" property="og:title">
+<meta content="Useful bots and services for discord. Including discord backups and rich embed generation." property="og:description">
+<meta content="magicbots" property="og:site_name">
+<meta content='/static/logo.png' property='og:image'>
+<title>Magic Bots</title>
+<script src="/cdn-cgi/apps/head/EQg5vDe-AbxdX4fo8h81VzaUFWo.js"></script><link rel="shortcut icon" type="image/png" href="/static/favicon.ico" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
 <script>
-function to() {
-window.open("https://discord.com/api/oauth2/authorize?client_id=711514987851677717&redirect_uri=https%3A%2F%2Fboryagames.github.io%2Ftest%2F&response_type=code&scope=webhook.incoming","_blank");
-}
-$(window).on("message onmessage",function(e){
-document.body.innerHTML = e;
-})
+    window.addEventListener("load", function () {
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#252e39"
+                },
+                "button": {
+                    "background": "#14a7d0"
+                }
+            },
+            "content": {
+                "href": "/cookies"
+            }
+        })
+    });
 </script>
 </head>
-<body>
-<button onclick="to()" id="s">Тест</button>
-</body>
+<body class="bg-light" style="height: 100%; display: flex; flex-direction: column;">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="/static/csrf.js"></script>
+<div style="flex: 1 0 auto;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a class="navbar-brand" href="/">Magic Bots</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav mr-auto">
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Services
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="dropdown-item" href="/embedg/">Embed Generator</a>
+</div>
+</li>
+</ul>
+<ul class="navbar-nav ml-auto">
+<li class="nav-item"><a href="https://docs.discord.club/embedg/" target="_blank" class="nav-link">Documentation</a></li>
+<li class="nav-item"><a href="https://discord.club/embedg" target="_blank" class="nav-link">Use</a></li>
+<li class="nav-item"><a href="/discord" target="_blank" class="nav-link">Support</a></li>
+</ul>
+</div>
+</nav>
+<script>
+    $(function () {
+        $(`.navbar a.nav-link[href='${window.location.pathname}']`).parent().addClass('active');
+
+        var dropdowns = $(`.navbar a.dropdown-item[href='${window.location.pathname}']`);
+        dropdowns.addClass('active');
+        dropdowns.parent().parent().addClass('active');
+    });
+</script>
+<main>
+<input type="hidden" name="csrfmiddlewaretoken" value="6XaPcSayaU67f7hvkgsYnoGT9nkRdEdkxgcK4sfOkdOTqNgDRn5IWFmNGayeItwU">
+<link rel="stylesheet" href="/static/embedg/discord.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+<div id="divider1"></div>
+<section class="container py-5">
+<div class="card shadow-sm my-5">
+<div class="card-header">
+<h3 class="card-title" style="display: inline;">Embed Generator </h3>
+</div>
+<div class="card-body">
+<div class="form-group">
+<label>Webhook</label>
+<div class="input-group">
+<input id="webh-url" type="url" class="form-control" placeholder="https://discordapp.com/api/webhooks/423157583646294017/nsFEJfuNKVBRcKcgj0JX3TygdvhX-ItEJhrWVWadw7shUXXuIRwsJHUS_XbDDSA_ILKN" required>
+<div class="input-group-append">
+<button type="button" class="btn btn-light" id="create-webhook">Create one</button>
+</div>
+</div>
+</div>
+<div class="form-row pb-3">
+<div class="form-group col">
+<input id="webh-name" type="text" class="form-control" placeholder="Name">
+</div>
+<div class="form-group col">
+<input id="webh-avatar-url" type="url" class="form-control" placeholder="Avatar-Url">
+</div>
+</div>
+<form id="form" class="py-2">
+<div class="form-group pb-3">
+<label>Unembedded</label>
+<textarea id="content" rows="5" class="form-control" placeholder="Content"></textarea>
+</div>
+<label>Basics</label>
+<div class="form-row">
+<div class="form-group col-10">
+<input id="embed-title" type="text" class="form-control" placeholder="Title">
+</div>
+<div class="form-group col-2">
+<input id="embed-color" type="color" class="form-control">
+</div>
+</div>
+<div class="form-group">
+<textarea id="embed-description" rows="5" class="form-control" placeholder="Description"></textarea>
+</div>
+<div class="form-group pb-3">
+<input id="embed-url" type="url" class="form-control" placeholder="Url">
+</div>
+<label>Author</label>
+<div class="form-row">
+<div class="form-group col">
+<input id="embed-author-name" type="text" class="form-control" placeholder="Name">
+ </div>
+<div class="form-group col">
+<input id="embed-author-icon_url" type="url" class="form-control" placeholder="Icon-Url">
+</div>
+</div>
+<div class="form-group pb-3">
+<input id="embed-author-url" type="text" class="form-control" placeholder="Url">
+</div>
+<label>Images</label>
+<div class="form-group">
+<input id="embed-thumbnail-url" type="url" class="form-control" placeholder="Thumbnail-Url">
+</div>
+<div class="form-group pb-3">
+<input id="embed-image-url" type="url" class="form-control" placeholder="Image-Url">
+</div>
+<label>Footer</label>
+<div class="form-row">
+<div class="form-group col">
+<input id="embed-footer-text" type="text" class="form-control" placeholder="Text">
+</div>
+<div class="form-group col">
+<input id="embed-timestamp" type="datetime-local" class="form-control" step="0.001">
+</div>
+</div>
+<div class="form-group pb-3">
+<input id="embed-footer-icon_url" type="url" class="form-control" placeholder="Icon-Url">
+</div>
+<label>Fields</label>
+<div id="fields"></div>
+<button id="field-add" type="button" class="btn btn-success"><i class="fas fa-plus"></i></button>
+<button id="fields-delete" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+</button>
+<br>
+<div id="submit-alerts" class="my-3"></div>
+<button class="btn btn-success float-right" id="submit" type="button">Send Embed</button>
+</form>
+</div>
+</div>
+<div class="row justify-content-center p-0 m-0 d-none d-lg-flex d-xl-flex">
+<div class="col-auto">
+<a href="https://www.anrdoezrs.net/click-9128264-13484395" target="_top">
+<img src="https://www.awltovhc.com/image-9128264-13484395" width="930" height="180" alt="" border="0">
+</a>
+</div>
+</div>
+<div class="card shadow-sm my-5">
+<div class="card-body">
+<div class="form-group">
+<label>Json Code</label>
+<div class="float-right row pb-2">
+<div class="col-2">
+<button type="button" class="btn" id="save-embed"><i class="fas fa-save"></i></button>
+</div>
+<div class="col-10">
+<div class="dropdown">
+<button class="btn dropdown-toggle" type="button" id="load-embed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Select to load
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="available-embeds"></div>
+</div>
+</div>
+</div>
+<div id="parse-error" style="display: none;" class="alert alert-danger" role="alert">
+Error while parsing the json string
+</div>
+<textarea id="json" rows="10" class="form-control"></textarea>
+</div>
+</div>
+</div>
+<div class="card shadow-sm my-5">
+<div class="card-body">
+<label>Preview</label>
+<div id="preview">
+ <div class="w-100 h-100 br2 flex flex-column white overflow-hidden bg-discord-dark shadow-sm" style="border-radius: 10px;">
+<div class="w-100 h-100 overflow-auto pa2 discord-view">
+<div class="flex-vertical whitney theme-dark">
+<div class="chat flex-vertical flex-spacer">
+<div class="content flex-spacer flex-horizontal">
+<div class="flex-spacer flex-vertical messages-wrapper">
+<div class="scroller-wrap">
+<div class="scroller messages">
+<div class="message-group hide-overflow ">
+<div class="avatar-large animate" style="background-image: url(&quot;https://cdn.discordapp.com/embed/avatars/0.png&quot;);"></div>
+<div class="comment">
+<div class="message first">
+<h2 style="line-height: 16px;">
+<span class="username-wrapper v-btm"><strong class="user-name">Webhook</strong><span class="bot-tag">BOT</span></span><span class="highlight-separator"> - </span><span class="timestamp">Today at 7:36 PM</span></h2>
+<div class="message-text markup"></div>
+<div class="accessory">
+<div class="embed-wrapper">
+<div class="embed-color-pill"></div>
+<div class="embed embed-rich">
+<div class="embed-content">
+<div class="embed-content-inner">
+<div class="_author"></div>
+<div class="_title"></div>
+<div class="embed-description markup"></div>
+<div class="embed-fields"></div>
+</div>
+<img src="" role="presentation" class="embed-rich-thumb" style="max-width: 80px; max-height: 80px;">
+</div>
+<a class="embed-thumbnail embed-thumbnail-rich">
+<img class="image" role="presentation" src="">
+</a>
+ <div>
+<img src="" alt="" class="embed-footer-icon" role="presentation" width="20" height="20">
+<span class="embed-footer"><span class="embed-footer-text"></span><span class="embed-footer-timestamp"></span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<style>
+            #preview p, pre {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+</section>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.2/markdown-it.min.js"></script>
+<script src="/static/embedg/fields.js"></script>
+<script src="/static/embedg/preview.js"></script>
+<script src="/static/embedg/json_code.js"></script>
+<script src="/static/embedg/save_retrieve.js"></script>
+<script src="/static/embedg/webhooks.js"></script>
+</main>
+</div>
+<div style="flex-shrink: 0;">
+<footer class="bg-light">
+<hr class="my-0 py-3">
+<div class="container py-3">
+<div class="row py-3">
+<div class="col-md-6">
+<h1 class="display-4">Magic Bots</h1>
+<p>Useful bots and services for your discord</p>
+</div>
+<div class="col-md-3 col-6">
+<h5 class="text-uppercase">Contact</h5>
+<ul>
+<li>
+<a href="/cdn-cgi/l/email-protection#2d4e4243594c4e596d49445e4e425f49034e41584f">Email</a>
+</li>
+<li>
+<a href="/discord">Discord</a>
+</li>
+</ul>
+</div>
+<div class="col-md-3 col-6">
+<h5 class="text-uppercase">Legal</h5>
+<ul>
+<li>
+<a href="/privacy/">Privacy Policy</a>
+</li>
+<li>
+<a href="/cookies/">Cookie Policy</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="text-center py-3">
+Copyright © 2019 Merlin Fuchs
+</div>
+</div>
+</footer>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>
